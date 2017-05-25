@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+<title>Walmart Heatmap</title>
+
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+
+<style type="text/css" media="screen">
+#map { height: 800px; }  
+</style>
+
+</head>
+
+<body>
+
+<div id="map"></div>
+
+<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+<script src="http://leaflet.github.io/Leaflet.heat/dist/leaflet-heat.js">
+</script>
+<script src="walmart.js"></script>  
+
+<script>
+
+var mymap = L.map('map').setView([40.88, -101.16], 4);
+L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+    maxZoom: 18,
+    id: 'arunsank.247n5ngk',
+	accessToken: 'pk.eyJ1IjoiYXJ1bnNhbmsiLCJhIjoiY2l2aXl2cnp3MDF5czJvcGJyc2FmNm4zaCJ9.59e1Szh-3z5StTWSdQ-05Q#3'
+	
+}).addTo(mymap);
+addressPoints = data.map(function (p) { return [p[0], p[1]]; });
+var heat = L.heatLayer(addressPoints,{max:0.01,radius:11,blur:11,maxZoom:15}).addTo(mymap); 
+
+</script>
+
+</body>
+</html>
